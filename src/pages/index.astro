@@ -1,0 +1,13 @@
+---
+import MainApp from "@Apps/MainApp";
+import Layout from "@Layouts/Layout.astro";
+---
+
+<Layout title="Template" description="Template">
+	<section class="mobile-stories w-100 h-dvh mx-auto">
+		<MainApp client:only="react" />
+	</section>
+	<div class="my-5 f-col g-3">
+		wasa
+	</div>
+</Layout>

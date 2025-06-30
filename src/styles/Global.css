@@ -1,0 +1,38 @@
+@import './tailwind/index.css';
+
+body {
+  @apply bg-lifo-bg flex w-full flex-col justify-center align-middle;
+}
+
+.mobile-stories {
+  @apply flex items-center justify-center;
+}
+.search-list-card{
+  line-height: 1.4rem;
+}
+
+.spotify-card {
+  height: max-content;
+  line-height: 1.4rem;
+  letter-spacing: 0.014em;
+  @apply select-none;
+  
+  --offset-y: inherit;
+  --offset-x: inherit;
+  top: var(--offset-x, 15%);
+  left: var(--offset-y, 50%);
+  transform: translate(-50%, -50%);
+}
+
+.spotify-card[data-type=simple] {
+  padding: 6px 8px 6px 6px;
+  @apply flex w-max gap-4 rounded-md bg-amber-50;
+}
+
+.spotify-card[data-type=card] {
+  @apply flex-row;
+}
+
+.spotify-card[data-type=circular] {
+  @apply flex-row;
+}
