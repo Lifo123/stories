@@ -7,10 +7,12 @@ import { Skeleton } from "@lifo123/library";
 
 
 
-export default function Search() {
+export default function Search({ isVisible }: any) {
     const { searchResults, historyResults } = useStore($Search);
 
     const elementRef = React.useRef<HTMLDivElement>(null);
+
+    const isVisibleClass = isVisible ? 'opacity-1 pointer-events-auto' : 'opacity-0 pointer-events-none';
 
     //HandleClose
     React.useEffect(() => {
@@ -38,7 +40,8 @@ export default function Search() {
 
 
     return (
-        <section className="absolute top-full left-1/2 bg-lifo-bg-secondary -translate-x-1/2 w-full mt-3 rounded-md h-max p-2 drop-shadow-2xl shadow-lifo-bg"
+        <section
+            className={`absolute top-full left-1/2 bg-lifo-bg-secondary -translate-x-1/2 w-full mt-3 rounded-md h-max p-2 ${isVisibleClass}`}
             ref={elementRef}
         >
             <div className="f-row gap-4 f-align-center justify-between w-full p-2 pt-2">
@@ -47,7 +50,7 @@ export default function Search() {
                 </p>
             </div>
             {list.map((item: any, idx: number) => (
-                <Card key={idx} data={item} isSearch={isSearch} />
+                <Card key={idx} data={item} isSearch={isSearch} isVisible={isVisible} />
             ))}
 
         </section>
@@ -55,7 +58,7 @@ export default function Search() {
 }
 
 // Card.tsx
-const Card = React.memo(({ data, isSearch }: any) => {
+const Card = React.memo(({ data, isSearch, isVisible }: any) => {
     const { name: title = '—', artists, album } = data;
     const description = artists?.[0]?.name ?? 'Unknown artist';
     const url = album?.images?.[2]?.url ?? '';
@@ -63,9 +66,10 @@ const Card = React.memo(({ data, isSearch }: any) => {
     const [loaded, setLoaded] = React.useState(false);
 
     return (
-        <div className="search-list-card f-row gap-4 f-align-center w-full p-2 hover:bg-lifo-bg-third rounded-md pointer"
-            onClick={() => {
-                searchUtils.selectSong(data);
+        <div className={`search-list-card f-row gap-4 f-align-center w-full p-2 hover:bg-lifo-bg-third rounded-md ${isVisible ? 'pointer' : ''}`}
+            onClick={async () => {
+                await searchUtils.selectSong(data);
+                
                 $Search.set({
                     ...$Search.get(),
                     isFile: true,
@@ -86,7 +90,7 @@ const Card = React.memo(({ data, isSearch }: any) => {
             <div className="f-row no-select f-grow justify-between overflow-hidden w-90">
                 <div className="f-col leading-snug w-85">
                     <span className="fs-3 fw-400  text-nowrap truncate block">{title}</span>
-                    <span className="fs-2 fw-400 text-lifo-text truncate block">{description}</span>
+                    <span className="fs-2 fw-500 text-lifo-text truncate block">{description}</span>
                 </div>
                 {
                     isSearch && (

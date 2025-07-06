@@ -7,7 +7,7 @@
     "dev": "astro dev --host",
     "start": "astro dev --host",
     "build": "pnpm run build:styles && astro build",
-    "build:styles": "tailwindcss -i ./src/styles/Global.css -o ./src/styles/Final.css",
+    "build:styles": "tailwindcss -i ./src/styles/tailwind/index.css -o ./src/styles/Final.css",
     "preview": "pnpm run build && astro preview",
     "astro": "astro",
     "deploy": "gh-pages -d build --dotfiles",

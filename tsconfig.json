@@ -19,7 +19,7 @@
       "@Content/*": ["src/content/*"],
       "@Styles/*": ["src/styles/*"],
       "@Stores/*": ["src/stores/*"],
-
+      "@Types/*": ["src/types/*"],
     },
     "skipLibCheck": true,
     "strict": true,

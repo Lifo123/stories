@@ -6,7 +6,6 @@ import UI from "@lifo123/library/UI";
 export const StoriesInitalState = {
     isUpload: false,
     isMobile: window.innerWidth < 768,
-    spotifyCard: null,
 }
 export const $Stories = map<StoriesStore>(StoriesInitalState)
 

@@ -82,7 +82,7 @@ export default function UploadBtn() {
                 <span className="size-11 pointer d-flex f-center">
                     <Icons icon="search" size={26} />
                 </span>
-                {isSearchClicked && <Search />}
+                <Search isVisible={isSearchClicked} />
             </div>
 
             <div className="border-dashed border bg-lifo-bg-secondary border-lifo-border rounded-xl p-4 f-col f-center gap-4 max-w-3xl">

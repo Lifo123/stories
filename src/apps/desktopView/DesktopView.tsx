@@ -1,14 +1,16 @@
 import { useStore } from "@nanostores/react";
-import { $InterfaceControl, $Search, $Stories } from "@Stores/index"
+import { $InterfaceControl, $Stories } from "@Stores/index"
 import MusicLayer from "./MusicLayer";
-import UI from "@lifo123/library/UI";
-import UTIL from "@Utils/Index";
 import Icons from "@Components/Icons";
 import { storiesUtils } from "@Stores/Stories.store";
+import React from "react";
+import { Skeleton } from "@lifo123/library";
 
 
 export default function DesktopView() {
-    const { isUpload, fileURL, fileType } = useStore($Stories);
+    const [isLoad, setIsLoad] = React.useState(false);
+
+    const { isUpload, fileURL, fileType, spotifyCard } = useStore($Stories);
     const { musiclayer } = useStore($InterfaceControl);
 
     if (!isUpload) return null;
@@ -29,7 +31,7 @@ export default function DesktopView() {
                                     transform: "scale(1.2)",
                                 }}
                             ></span>
-                            <img src={fileURL} alt="Preview" className="w-full object-cover z-1 rounded-md" />
+                            <img src={fileURL} alt="file upload img" className="w-full object-cover z-1 rounded-md" loading="eager" />
                         </>
                     ) : fileType === 'video' ?
                         (
@@ -54,7 +56,22 @@ export default function DesktopView() {
                         <Icons icon="closeCircle" size={32} />
                     </span>
                 </div>
-                panelright
+                {
+                    spotifyCard && (
+                        <section>
+                            {!isLoad && <Skeleton className="d-flex f-center w-full rounded-xl mt-3" style={{ height: '152px' }} />}
+                            <iframe
+                                className={`rounded-xl mt-3 ${isLoad ? 'opacity-1' : 'opacity-0'}`}
+                                src={`https://open.spotify.com/embed/track/${spotifyCard?.id}?utm_source=generator`}
+                                width="100%"
+                                height="152px"
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                loading="eager"
+                                onLoad={() => setIsLoad(true)}
+                            />
+                        </section>
+                    )
+                }
             </section>
         </main>
     )

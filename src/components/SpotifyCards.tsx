@@ -1,12 +1,10 @@
 import { useStore } from "@nanostores/react";
 import { $InterfaceControl, $Stories } from "@Stores/index";
-import React from "react";
+import type { SpotifyTrack } from "@Types/Spotify.types";
 
-interface SpotifyCardsProps {
-    type: 'simple' | 'card' | 'circular';
-}
 
-export default function SpotifyCards(props: SpotifyCardsProps) {
+
+export default function SpotifyCards(props: SpotifyTrack) {
     const CARD = useStore($Stories)?.spotifyCard;
 
     return (
@@ -28,6 +26,7 @@ export default function SpotifyCards(props: SpotifyCardsProps) {
                 <span className="fs-custom-14-5 text-black" style={{ fontWeight: 530 }}>{CARD?.name}</span>
                 <span className="fs-custom-14-5 fw-300 text-black">{CARD?.artists[0]?.name}</span>
             </div>
+            <audio src={CARD?.preview_url}>wasa</audio>
         </div>
     )
 }
