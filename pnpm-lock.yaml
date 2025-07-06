@@ -24,8 +24,8 @@ importers:
         specifier: ^3.4.1
         version: 3.4.1
       '@lifo123/library':
-        specifier: ^1.6.4
-        version: 1.6.4(@nanostores/persistent@1.0.0(nanostores@0.11.4))(@nanostores/react@0.8.4(nanostores@0.11.4)(react@19.1.0))(@types/node@22.15.34)(@types/react@19.1.8)(jiti@2.4.2)(lightningcss@1.30.1)(nanostores@0.11.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(yaml@2.8.0)
+        specifier: ^1.6.5
+        version: 1.6.5(@nanostores/persistent@1.0.0(nanostores@0.11.4))(@nanostores/react@0.8.4(nanostores@0.11.4)(react@19.1.0))(@types/node@22.15.34)(@types/react@19.1.8)(jiti@2.4.2)(lightningcss@1.30.1)(nanostores@0.11.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(yaml@2.8.0)
       '@nanostores/react':
         specifier: ^0.8.4
         version: 0.8.4(nanostores@0.11.4)(react@19.1.0)
@@ -524,8 +524,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==, tarball: https://registry.npmjs.org/@jridgewell/trace-mapping/-/trace-mapping-0.3.25.tgz}
 
-  '@lifo123/library@1.6.4':
-    resolution: {integrity: sha512-sRlFW+48TZKmqXnLWZ/hajSRMJNprP7HGgDLDBp7aiskpENVYDHH+fC29+LNO87TeSpjmjBvVJQUtWXh0TTZFw==, tarball: https://registry.npmjs.org/@lifo123/library/-/library-1.6.4.tgz}
+  '@lifo123/library@1.6.5':
+    resolution: {integrity: sha512-4BXj5M8S55GYls89mFxfH9cpZdzSlluyu6jHCctw20GpKLVidm7JDWaQbMNjx7eDitg3wdislpMmuF64Atr97A==, tarball: https://registry.npmjs.org/@lifo123/library/-/library-1.6.5.tgz}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       '@nanostores/persistent': ^1.0.0
@@ -3154,7 +3154,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@lifo123/library@1.6.4(@nanostores/persistent@1.0.0(nanostores@0.11.4))(@nanostores/react@0.8.4(nanostores@0.11.4)(react@19.1.0))(@types/node@22.15.34)(@types/react@19.1.8)(jiti@2.4.2)(lightningcss@1.30.1)(nanostores@0.11.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(yaml@2.8.0)':
+  '@lifo123/library@1.6.5(@nanostores/persistent@1.0.0(nanostores@0.11.4))(@nanostores/react@0.8.4(nanostores@0.11.4)(react@19.1.0))(@types/node@22.15.34)(@types/react@19.1.8)(jiti@2.4.2)(lightningcss@1.30.1)(nanostores@0.11.4)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(yaml@2.8.0)':
     dependencies:
       '@astrojs/react': 4.3.0(@types/node@22.15.34)(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(jiti@2.4.2)(lightningcss@1.30.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(yaml@2.8.0)
       '@nanostores/persistent': 1.0.0(nanostores@0.11.4)

@@ -1,7 +1,10 @@
 import { useStore } from "@nanostores/react";
-import { $InterfaceControl, $Stories } from "@Stores/index"
-import Controls from "./Controls";
+import { $InterfaceControl, $Search, $Stories } from "@Stores/index"
 import MusicLayer from "./MusicLayer";
+import UI from "@lifo123/library/UI";
+import UTIL from "@Utils/Index";
+import Icons from "@Components/Icons";
+import { storiesUtils } from "@Stores/Stories.store";
 
 
 export default function DesktopView() {
@@ -11,9 +14,8 @@ export default function DesktopView() {
     if (!isUpload) return null;
 
     return (
-        <main className="h-full w-full f-row relative f-center">
-            <Controls />
-            <div className="aspect-[9/16] h-[98%] rounded-lg relative d-flex f-center o-hidden p-3">
+        <main className="h-[calc(100vh_-_18px)] w-full f-row relative f-center gap-4 px-3">
+            <section className="aspect-[9/16] h-full max-h-screen rounded-lg relative d-flex f-center o-hidden p-3">
                 {
                     fileType === 'image' ? (
                         <>
@@ -40,7 +42,20 @@ export default function DesktopView() {
                         ) : null
                 }
                 <MusicLayer />
-            </div>
+            </section>
+            <section className="bg-lifo-bg-secondary rounded-lg f-col h-full p-3 min-w-lg">
+                <div>
+                    <span
+                        className="rounded-full pointer pointer-events-auto h-max"
+                        onClick={() => {
+                            storiesUtils.close();
+                        }}
+                    >
+                        <Icons icon="closeCircle" size={32} />
+                    </span>
+                </div>
+                panelright
+            </section>
         </main>
     )
 }

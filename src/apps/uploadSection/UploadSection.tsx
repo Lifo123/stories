@@ -5,6 +5,7 @@ import { $Stories, $Search } from "@Stores/index";
 
 import Icons from "@Components/Icons";
 import Search from "./Search";
+import { searchTracks } from "@Services/Search.services";
 
 
 export default function UploadBtn() {
@@ -17,9 +18,6 @@ export default function UploadBtn() {
             $Stories.set({
                 ...prev,
                 isUpload: true,
-                file: null,
-                fileURL: e.clipboardData?.getData("text"),
-                fileType: "image",
             });
         };
 
@@ -43,14 +41,13 @@ export default function UploadBtn() {
 
         const url = URL.createObjectURL(file);
 
-        await new Promise((res) => setTimeout(res, 600));
+        await new Promise((res) => setTimeout(res, 180));
 
         $Stories.set({
             ...$Stories.get(),
-            isUpload: true,
-            file,
             fileURL: url,
             fileType: isImage ? "image" : "video",
+            isUpload: true,
         });
     }
 
@@ -60,10 +57,17 @@ export default function UploadBtn() {
         if (searchTimeout.current) {
             clearTimeout(searchTimeout.current);
         }
+        if(!value) {
+            $Search.setKey('isSearchClicked', false);
+            return;
+        };
 
-        searchTimeout.current = setTimeout(() => {
-            $Search.setKey('searchText', value);
-        }, 500);
+        searchTimeout.current = setTimeout(async () => {
+            const tracks = await searchTracks(value);
+            console.log(tracks);
+            
+            $Search.setKey('searchResults', tracks);
+        }, 300);
     };
 
     return (

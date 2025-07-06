@@ -1,19 +1,27 @@
 import { atom, deepMap, map } from "nanostores";
+import type { StoriesStore } from "src/types/Stories.types";
+import { $Search, SearchInitialState } from "./Search.store";
+import UI from "@lifo123/library/UI";
 
-
-interface Stories {
-    isUpload: boolean;
-    file: File | null;
-    fileURL: string | undefined;
-    fileType: 'image' | 'video' | 'spotify';
-    [key: string]: any;
-}
-
-export const $Stories = map<Stories>({
+export const StoriesInitalState = {
     isUpload: false,
     isMobile: window.innerWidth < 768,
-    file: null,
-    fileType: 'image',
-    fileURL: '/stories/menor3.webp',
-})
+    spotifyCard: null,
+}
+export const $Stories = map<StoriesStore>(StoriesInitalState)
 
+
+const close = () => {
+    UI.Dialog.show({
+        title: 'Are you sure to leave?',
+        message: 'This acction is not reversible.',
+        onClick: async () => {
+            $Stories.set(StoriesInitalState);
+            $Search.set(SearchInitialState);
+        }
+    })
+}
+
+export const storiesUtils = {
+    close,
+}

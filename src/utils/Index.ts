@@ -1,6 +1,10 @@
 
+const awaitTime = async (time: number) => {
+    await new Promise(res => setTimeout(res, time))
+}
+
 const UTIL = {
-    test: 'hola'
+    awaitTime
 }
 
 export default UTIL
