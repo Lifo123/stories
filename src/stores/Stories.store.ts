@@ -17,7 +17,11 @@ const close = () => {
         message: 'This acction is not reversible.',
         onClick: async () => {
             $Stories.set(StoriesInitalState);
-            $Search.set(SearchInitialState);
+            $Search.set({
+                ...$Search.get(),
+                isSearchClicked: false,
+                isUploading: false,
+            });
         }
     })
 }

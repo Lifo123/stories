@@ -3,6 +3,7 @@ import { $Search, searchUtils } from "@Stores/Search.store";
 import { useStore } from "@nanostores/react";
 import { $Stories } from "@Stores/Stories.store";
 import Icons from "@Components/Icons";
+import { Skeleton } from "@lifo123/library";
 
 
 
@@ -37,11 +38,11 @@ export default function Search() {
 
 
     return (
-        <section className="absolute top-full left-1/2 bg-lifo-bg-secondary -translate-x-1/2 w-full mt-3 rounded-md h-max p-2"
+        <section className="absolute top-full left-1/2 bg-lifo-bg-secondary -translate-x-1/2 w-full mt-3 rounded-md h-max p-2 drop-shadow-2xl shadow-lifo-bg"
             ref={elementRef}
         >
             <div className="f-row gap-4 f-align-center justify-between w-full p-2 pt-2">
-                <p className="m-0 px-2 fs-custom-14-5 fw-500 text-lifo-title">
+                <p className="m-0 px-1 fs-custom-14-5 fw-500 text-lifo-title">
                     {searchResults.length ? 'Resultados' : 'Búsquedas recientes'}
                 </p>
             </div>
@@ -54,10 +55,12 @@ export default function Search() {
 }
 
 // Card.tsx
-export const Card = React.memo(({ data, isSearch }: any) => {
+const Card = React.memo(({ data, isSearch }: any) => {
     const { name: title = '—', artists, album } = data;
     const description = artists?.[0]?.name ?? 'Unknown artist';
-    const url = album?.images?.[2]?.url ?? '/stories/menor3.webp';
+    const url = album?.images?.[2]?.url ?? '';
+
+    const [loaded, setLoaded] = React.useState(false);
 
     return (
         <div className="search-list-card f-row gap-4 f-align-center w-full p-2 hover:bg-lifo-bg-third rounded-md pointer"
@@ -71,15 +74,19 @@ export const Card = React.memo(({ data, isSearch }: any) => {
                 $Stories.setKey('isUpload', true);
             }}
         >
-            <img
-                src={url}
-                alt={`${title} cover image`}
-                className="size-12 rounded-sm object-cover d-flex f-center no-select ml-1"
-            />
-            <div className="f-row no-select f-grow justify-between">
-                <div className="f-col leading-snug">
-                    <span className="fs-3 fw-400 overflow-ellipsis">{title}</span>
-                    <span className="fs-2 fw-400 text-lifo-text overflow-ellipsis">{description}</span>
+            <span className="d-flex size-12">
+                {!loaded && <Skeleton className="size-12 rounded-sm absolute" />}
+                <img
+                    src={url}
+                    alt={`${title} cover image`}
+                    className={`size-12 rounded-sm object-cover d-flex f-center no-select ${loaded ? '' : 'invisible'}`}
+                    onLoad={() => setLoaded(true)}
+                />
+            </span>
+            <div className="f-row no-select f-grow justify-between overflow-hidden w-90">
+                <div className="f-col leading-snug w-85">
+                    <span className="fs-3 fw-400  text-nowrap truncate block">{title}</span>
+                    <span className="fs-2 fw-400 text-lifo-text truncate block">{description}</span>
                 </div>
                 {
                     isSearch && (

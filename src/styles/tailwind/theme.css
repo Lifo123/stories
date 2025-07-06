@@ -12,7 +12,7 @@
   --color-lifo-bg: #000;
   --color-lifo-bg-secondary: #101010;
   --color-lifo-border: #555555;
-  --color-lifo-bg-third: #272727;
+  --color-lifo-bg-third: rgb(39, 39, 40);
 
   --color-lifo-title: #fff;
   --color-lifo-text: #b3b3b3;

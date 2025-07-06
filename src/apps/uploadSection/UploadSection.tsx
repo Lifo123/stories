@@ -6,6 +6,7 @@ import { $Stories, $Search } from "@Stores/index";
 import Icons from "@Components/Icons";
 import Search from "./Search";
 import { searchTracks } from "@Services/Search.services";
+import { searchUtils } from "@Stores/Search.store";
 
 
 export default function UploadBtn() {
@@ -53,20 +54,19 @@ export default function UploadBtn() {
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-
+        
         if (searchTimeout.current) {
             clearTimeout(searchTimeout.current);
         }
         if(!value) {
-            $Search.setKey('isSearchClicked', false);
+            searchUtils.setDefault();
             return;
         };
-
+        
         searchTimeout.current = setTimeout(async () => {
-            const tracks = await searchTracks(value);
-            console.log(tracks);
-            
+            const tracks = await searchTracks(value);      
             $Search.setKey('searchResults', tracks);
+            $Search.setKey('isSearchClicked', true);
         }, 300);
     };
 
@@ -101,7 +101,7 @@ export default function UploadBtn() {
                 <span className="fs-2">
                     Upload an image or Paste URL
                 </span>
-                <span className="fs-1 fw-400 mt-1 text-center">By uploading an image or URL you agree to our Terms of Use and Privacy Policy. </span>
+                <span className="fs-1 fw-400 mt-1 text-center text-lifo-text">By uploading an image or URL you agree to our Terms of Use and Privacy Policy. </span>
             </div>
         </section>
     )

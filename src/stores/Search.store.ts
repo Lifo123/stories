@@ -13,7 +13,7 @@ export const $Search = map<SearchStore>(SearchInitialState)
 
 
 $Search.subscribe((value) => {
-    if (value.historyResults[0]?.id) {
+    if (value.historyResults[0]?.id) {  
         LocalSearch.update('historyResults', value.historyResults)
     }
 })
@@ -23,10 +23,11 @@ const selectSong = (props: any) => {
     const prev = LocalSearch.get('historyResults') || [];
     const exists = prev.some((t: any) => t.id === props.id);
 
-    if (!exists) {
-        const updated = [props, ...prev].slice(0, 5);
+    if(!exists) {
+        const updated = [props, ...prev].slice(0, 4);
         $Search.setKey('historyResults', updated);
     }
+
     $Stories.setKey('spotifyCard', props);
     $Search.setKey('searchResults', []);
 };
@@ -37,8 +38,12 @@ const deleteSong = (id: string) => {
     $Search.setKey('historyResults', updated);
 }
 
+const setDefault = () => {
+    $Search.set(SearchInitialState);
+}
 
 export const searchUtils = {
     selectSong,
     deleteSong,
+    setDefault
 }
